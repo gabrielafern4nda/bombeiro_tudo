@@ -17,11 +17,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Adicione as demais variáveis conforme as colunas no banco
 
     // Prepara a consulta SQL
-    $comando = $pdo->prepare("INSERT INTO vitima_era (Ciclista, CondutorMoto, CondutorCarro, Clinico, Gestante, Trauma, PassageiroBancoFrente, PassageiroBancoTras, PassageiroMoto, Pedestre) VALUES (:ciclista, :condutorMoto)");
+    $comando = $pdo->prepare("INSERT INTO vitima_era (Ciclista, CondutorMoto, CondutorCarro, Clinico, Gestante, Trauma, PassageiroBancoFrente, PassageiroBancoTras, PassageiroMoto, Pedestre) VALUES (:ciclista, :condutorMoto, :condutorCarro, :clinico, :gestante, :trauma, :passageiroBancoFrente, :passageiroBancoTras, :passageiroMoto, :pedestre  )");
     // Adicione os demais campos e valores na consulta conforme as colunas no banco
 
     // Executa a consulta
-    $resultado = $comando->execute(array(":ciclista" => $ciclista, ":condutorMoto" => $condutorMoto));
+    $resultado = $comando->execute(array(":ciclista" => $ciclista, ":condutorMoto" => $condutorMoto, ":condutorCarro" => $condutorCarro, ":clinico" => $clinico, ":gestante" => $gestante, ":trauma" =>  $trauma, ":passageiroBancoFrente" => $passageiroBancoFrente, ":passageiroBancoTras" =>  $passageiroBancoTras, ":passageiroMoto" => $passageiroMoto, ":pedestre" => $pedestre ));
     // Adicione os demais campos e valores na execução conforme as colunas no banco
 
     // Verifica se a inserção foi bem sucedida
@@ -33,4 +33,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 } else {
     echo json_encode(array("resultado" => 0));
 }
+
+$pdo->commit();
+
+
 ?>
